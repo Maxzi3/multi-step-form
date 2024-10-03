@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Step3 = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Retrieve billingCycle and selectedPlan from Step 2
+  const { billingCycle, selectedPlan } = location.state || {};
+
   // Store selected add-ons in an array to allow multiple selections
   const [selectedAddons, setSelectedAddons] = useState([]);
-  const navigate = useNavigate();
 
   // Toggle the addon selection
   const handleAddonClick = (addon) => {
@@ -20,12 +25,25 @@ const Step3 = () => {
   // Check if an addon is selected
   const isAddonSelected = (addon) => selectedAddons.includes(addon);
 
+  // Add-on pricing based on billing cycle
+  const addonPrices = {
+    onlineService: billingCycle === "monthly" ? "+$1/mo" : "+$10/yr",
+    LargerStorage: billingCycle === "monthly" ? "+$2/mo" : "+$20/yr",
+    CustomizableProfile: billingCycle === "monthly" ? "+$2/mo" : "+$20/yr",
+  };
+
   const handleBack = () => {
     navigate("/step2");
   };
 
   const handleNext = () => {
-    navigate("/step4");
+    navigate("/step4", {
+      state: {
+        billingCycle,
+        selectedPlan,
+        selectedAddons,
+      },
+    });
   };
 
   return (
@@ -61,7 +79,9 @@ const Step3 = () => {
                 Access to Multiplayer games
               </p>
             </div>
-            <p className="md:ml-20 text-secondary2">+$1/mo</p>
+            <p className="md:ml-20 text-secondary2">
+              {addonPrices.onlineService}
+            </p>
           </div>
 
           <div
@@ -89,7 +109,9 @@ const Step3 = () => {
                 Extra 1TB of cloud save
               </p>
             </div>
-            <p className="md:ml-20 text-secondary2">+$1/mo</p>
+            <p className="md:ml-20 text-secondary2">
+              {addonPrices.LargerStorage}
+            </p>
           </div>
 
           <div
@@ -117,7 +139,9 @@ const Step3 = () => {
                 Custom theme on your profile
               </p>
             </div>
-            <p className="md:ml-20 text-secondary2">+$1/mo</p>
+            <p className="md:ml-20 text-secondary2">
+              {addonPrices.CustomizableProfile}
+            </p>
           </div>
         </main>
       </div>
@@ -129,7 +153,10 @@ const Step3 = () => {
         </button>
         <button
           onClick={handleNext}
-          className="bg-primary1 w-24 p-2 rounded text-white"
+          className={`bg-primary1 w-24 p-2 rounded text-white ${
+            selectedAddons.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          disabled={selectedAddons.length === 0} // Disable if no add-ons are selected
         >
           Next Step
         </button>

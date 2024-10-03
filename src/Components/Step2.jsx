@@ -31,7 +31,12 @@ const Step2 = () => {
     navigate("/");
   };
   const handleNext = () => {
-    navigate("/step3");
+    navigate("/step3", {
+      state: {
+        selectedPlan,
+        billingCycle,
+      },
+    });
   };
 
   return (
@@ -48,6 +53,7 @@ const Step2 = () => {
           {/* Arcade Plan */}
           <button
             onClick={() => handlePlanClick("arcade")}
+            value="Arcade"
             className={`flex md:flex-col flex-row md:w-44 border p-5 rounded-lg ${
               selectedPlan === "arcade" ? "border-blue-900" : "border-gray-300"
             }`}
@@ -65,6 +71,7 @@ const Step2 = () => {
           {/* Advanced Plan */}
           <button
             onClick={() => handlePlanClick("advanced")}
+            value="Advanced"
             className={`flex md:flex-col flex-row md:w-44 border p-5 rounded-lg ${
               selectedPlan === "advanced"
                 ? "border-blue-900"
@@ -88,6 +95,7 @@ const Step2 = () => {
           {/* Pro Plan */}
           <button
             onClick={() => handlePlanClick("pro")}
+            value="Pro"
             className={`flex flex-row md:flex-col md:w-44 border p-5 rounded-lg ${
               selectedPlan === "pro" ? "border-blue-900" : "border-gray-300"
             }`}
@@ -130,16 +138,16 @@ const Step2 = () => {
         </div>
       </div>
       {/* Navigation Buttons */}
-      <div className="flex justify-between items-center md:w-1/2 w-full my-2 mx-auto mb-0 md:relative fixed  bg-white p-4 md:bg-transparent">
-        <button
-          onClick={handleBack}
-          // className="md:mt-10"
-        >
+      <div className="flex justify-between items-center md:w-1/2 w-full my-2 mx-auto mb-0 md:relative fixed md:top-0 bottom-0 bg-white p-4 md:bg-transparent">
+        <button onClick={handleBack} className="text-primary1">
           Go Back
         </button>
         <button
           onClick={handleNext}
-          className=" bg-primary1 w-24 p-2 rounded text-white"
+          className={`bg-primary1 w-24 p-2 rounded text-white ${
+            !selectedPlan? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          disabled={!selectedPlan} // Disable if no add-ons are selected
         >
           Next Step
         </button>
