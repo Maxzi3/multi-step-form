@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 const Step4 = () => {
+  const { billingCycle, selectedPlan } = location.state || {};
   const navigate = useNavigate();
   const handleBack = () => {
     navigate("/step3");

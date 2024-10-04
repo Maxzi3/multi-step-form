@@ -41,7 +41,7 @@ const Step2 = () => {
 
   return (
     <>
-      <div className="md:w-1/2 w-11/12 mx-auto bg-white flex flex-col rounded-md py-6 px-8 relative md:top-0 bottom-16 md:mb-5 mb-20">
+      <div className="md:w-1/2 w-11/12 mx-auto bg-white flex flex-col rounded-md md:py-6 py-5  px-8 relative md:top-0 bottom-14 md:mb-5 mb-20">
         <h1 className="text-3xl font-bold mb-4 text-primary1">
           Select your Plan
         </h1>
@@ -49,12 +49,12 @@ const Step2 = () => {
           You have the option of monthly or yearly billing
         </p>
 
-        <main className="flex flex-col gap-2 md:flex-row justify-between py-10 md:py-2 ">
+        <main className="flex flex-col gap-2 md:flex-row justify-between py-4 md:py-2 ">
           {/* Arcade Plan */}
           <button
             onClick={() => handlePlanClick("arcade")}
             value="Arcade"
-            className={`flex md:flex-col flex-row md:w-44 border p-5 rounded-lg ${
+            className={`flex md:flex-col flex-row md:w-44 border p-4 md:items-baseline items-center rounded-lg ${
               selectedPlan === "arcade" ? "border-blue-900" : "border-gray-300"
             }`}
           >
@@ -72,7 +72,7 @@ const Step2 = () => {
           <button
             onClick={() => handlePlanClick("advanced")}
             value="Advanced"
-            className={`flex md:flex-col flex-row md:w-44 border p-5 rounded-lg ${
+            className={`flex md:flex-col flex-row md:w-44 border p-4 md:items-baseline items-center rounded-lg ${
               selectedPlan === "advanced"
                 ? "border-blue-900"
                 : "border-gray-300"
@@ -96,7 +96,7 @@ const Step2 = () => {
           <button
             onClick={() => handlePlanClick("pro")}
             value="Pro"
-            className={`flex flex-row md:flex-col md:w-44 border p-5 rounded-lg ${
+            className={`flex flex-row md:flex-col md:w-44 border p-4 md:items-baseline items-center rounded-lg ${
               selectedPlan === "pro" ? "border-blue-900" : "border-gray-300"
             }`}
           >
@@ -145,7 +145,7 @@ const Step2 = () => {
         <button
           onClick={handleNext}
           className={`bg-primary1 w-24 p-2 rounded text-white ${
-            !selectedPlan? "opacity-50 cursor-not-allowed" : ""
+            !selectedPlan ? "opacity-50 cursor-not-allowed" : ""
           }`}
           disabled={!selectedPlan} // Disable if no add-ons are selected
         >

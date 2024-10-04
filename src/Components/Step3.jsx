@@ -98,7 +98,7 @@ const Step3 = () => {
               checked={isAddonSelected("LargerStorage")}
               className="md:ml-2 accent-secondary2"
             />
-            <div className="md:mr-10">
+            <div className="md:mr-10 mr-6">
               <label
                 className="md:p-2 text-primary1 font-bold md:text-xl"
                 htmlFor="LargerStorage"
@@ -115,7 +115,7 @@ const Step3 = () => {
           </div>
 
           <div
-            className={`flex flex-row md:gap-10 gap-2 justify-around items-center md:w-10/1 p-3 border rounded-md text-sm ${
+            className={`flex flex-row md:gap-10 gap-2 justify-around items-center md:w-10/1 p-3 border rounded-md text-sm cursor-pointer ${
               isAddonSelected("CustomizableProfile")
                 ? "border-secondary2 bg-cool"
                 : "border-gray-300"
@@ -128,14 +128,14 @@ const Step3 = () => {
               checked={isAddonSelected("CustomizableProfile")}
               className="md:ml-2 accent-secondary2"
             />
-            <div className="">
+            <div className="ml-">
               <label
                 className="md:p-2 text-primary1 font-bold md:text-xl"
                 htmlFor="CustomizableProfile"
               >
                 Customizable profile
               </label>
-              <p className="md:p-2 md:text-sm text-xs text-primary2">
+              <p className="md:p-2 md:text-sm text-xs text-primary2 tracking-tighter">
                 Custom theme on your profile
               </p>
             </div>

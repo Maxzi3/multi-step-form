@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 
 const Navbar = () => {
   // Manage disabled state
@@ -89,42 +89,34 @@ const Navbar = () => {
       {/* Mobile View */}
       <nav className="md:hidden block bg-navMobile bg-cover w-full h-40 bg-right-bottom sticky">
         <ul className="flex flex-row justify-center gap-4 py-4">
-          <Link
+          <NavLink
             to="/"
-            className={`border-2 p-4 rounded-full text-lg w-10 h-10 flex items-center justify-center bg-primary text-white ${
-              disabled ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={linkClass}
             onClick={handleDisabledClick}
           >
             1
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/step2"
-            className={`border-2 p-4 rounded-full text-lg w-10 h-10 flex items-center justify-center bg-primary text-white ${
-              disabled ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={linkClass}
             onClick={handleDisabledClick}
           >
             2
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/step3"
-            className={`border-2 p-4 rounded-full text-lg w-10 h-10 flex items-center justify-center bg-primary text-white ${
-              disabled ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={linkClass}
             onClick={handleDisabledClick}
           >
             3
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/step4"
-            className={`border-2 p-4 rounded-full text-lg w-10 h-10 flex items-center justify-center bg-primary text-white ${
-              disabled ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className={linkClass}
             onClick={handleDisabledClick}
           >
             4
-          </Link>
+          </NavLink>
         </ul>
       </nav>
     </div>

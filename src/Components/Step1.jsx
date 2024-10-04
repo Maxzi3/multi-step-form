@@ -17,7 +17,7 @@ const Step1 = () => {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
   // Phone number regex to start with + and contain exactly 16 digits
-  const phoneRegex = /^\+\d{15}$/;
+  const phoneRegex = /^\+\d{13}$/;
 
   // Handle input changes and perform validation
   const handleChange = (e) => {
@@ -86,12 +86,12 @@ const Step1 = () => {
           />
 
           {/* Email Field */}
-          <div className="flex items-center justify-between md:mx-10 md:mt-4 md:mb-2 ">
+          <div className="flex items-center justify-between mx-10  mt-4 mb-2 ">
             <label htmlFor="email" className=" text-primary1">
               Email
             </label>
             {errors.email && (
-              <p className="text-red-500 text-xs mr-6 ">{errors.email}</p>
+              <p className="text-red-500 text-xs md:mr-6  ">{errors.email}</p>
             )}
           </div>
           <input
@@ -107,12 +107,14 @@ const Step1 = () => {
           />
 
           {/* Phone Number Field */}
-          <div className="flex items-center justify-between md:mx-10 md:mt-4 md:mb-2 ">
+          <div className="flex items-center gap-14 md:justify-between mx-10 mt-4 mb-2 ">
             <label htmlFor="phoneNumber" className=" text-primary1">
               Phone Number
             </label>
             {errors.phoneNumber && (
-              <p className="text-red-500 text-xs mr-6 ">{errors.phoneNumber}</p>
+              <p className="text-red-500 text-xs md:mr-6 ">
+                {errors.phoneNumber}
+              </p>
             )}
           </div>
           <input
@@ -131,7 +133,7 @@ const Step1 = () => {
         {/* Next Step Button */}
         <Link
           to="/step2"
-          className={`flex justify-center items-center relative -right-48 md:left-96 md:mt-20 mt-10 mb-4 w-32 p-2 rounded text-white ${
+          className={`flex justify-center items-center relative -right-48 sm:-right-36 md:left-96 md:mt-20 mt-10 mb-4 w-32 p-2 rounded text-white ${
             isFormValid ? "bg-primary1" : "bg-gray-400 cursor-not-allowed"
           }`}
           onClick={(e) => !isFormValid && e.preventDefault()} // Prevent navigation if form isn't valid
