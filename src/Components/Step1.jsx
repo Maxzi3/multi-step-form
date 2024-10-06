@@ -63,11 +63,11 @@ const Step1 = () => {
 
   return (
     <>
-      <div className="md:w-1/2 w-11/12 mx-auto bg-white z-10 md:mt-0 -mt-14 relative flex flex-col rounded-md md:p-4">
+      <div className="md:w-1/2 w-11/12 mx-auto bg-white z-10 md:mt-0 -mt-14 relative flex flex-col rounded-md md:p-4 shadow-md">
         <h1 className="md:text-4xl text-xl px-10 md:pt-4 pt-10 pb-2 text-primary1 font-bold">
           Personal Info
         </h1>
-        <p className="text-sm px-10">
+        <p className="text-lg  px-10 text-primary2">
           Please provide your name, email address, and phone number
         </p>
         <form action="" className="flex flex-col">

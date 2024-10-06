@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Step3 = () => {
@@ -8,18 +8,24 @@ const Step3 = () => {
   // Retrieve billingCycle and selectedPlan from Step 2
   const { billingCycle, selectedPlan } = location.state || {};
 
-  // Store selected add-ons in an array to allow multiple selections
-  const [selectedAddons, setSelectedAddons] = useState([]);
+  // Load selected add-ons from localStorage if available
+  const savedAddons = JSON.parse(localStorage.getItem("selectedAddons")) || [];
 
-  // Toggle the addon selection
+  // Store selected add-ons in an array to allow multiple selections
+  const [selectedAddons, setSelectedAddons] = useState(savedAddons);
+
+  // Toggle the addon selection and update localStorage
   const handleAddonClick = (addon) => {
+    let updatedAddons;
     if (selectedAddons.includes(addon)) {
       // If addon is already selected, remove it from the array
-      setSelectedAddons(selectedAddons.filter((item) => item !== addon));
+      updatedAddons = selectedAddons.filter((item) => item !== addon);
     } else {
       // Otherwise, add it to the array
-      setSelectedAddons([...selectedAddons, addon]);
+      updatedAddons = [...selectedAddons, addon];
     }
+    setSelectedAddons(updatedAddons);
+    localStorage.setItem("selectedAddons", JSON.stringify(updatedAddons)); // Save to localStorage
   };
 
   // Check if an addon is selected
@@ -48,7 +54,7 @@ const Step3 = () => {
 
   return (
     <>
-      <div className="md:w-1/2 w-11/12 mx-auto bg-white flex flex-col rounded-md py-6 px-8 relative md:top-0 bottom-16 md:mb-5 mb-20">
+      <div className="md:w-1/2 w-11/12 mx-auto bg-white flex flex-col rounded-md py-6 px-8 relative md:top-0 bottom-16 md:mb-5 mb-20 shadow-md">
         <h1 className="text-3xl font-bold mb-4 text-primary1">Pick add-ons</h1>
         <p className="text-lg text-gray-600 mb-6">
           Add-ons help enhance your gaming experience.
@@ -148,7 +154,10 @@ const Step3 = () => {
 
       {/* Navigation Buttons */}
       <div className="flex justify-between items-center md:w-1/2 w-full my-2 mx-auto mb-0 md:relative fixed md:top-0 bottom-0 bg-white p-4 md:bg-transparent">
-        <button onClick={handleBack} className="text-primary1">
+        <button
+          onClick={handleBack}
+          className="text-primary2 hover:text-primary1"
+        >
           Go Back
         </button>
         <button

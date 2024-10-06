@@ -1,24 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Arcade from "../assets/icon-arcade.svg";
 import Advanced from "../assets/icon-advanced.svg";
 import Pro from "../assets/icon-pro.svg";
-import { Navigate, useNavigate } from "react-router-dom";
-
 import Switch from "./Switch";
 
 const Step2 = () => {
   const navigate = useNavigate();
-  const [selectedPlan, setSelectedPlan] = useState(null);
-  const [billingCycle, setBillingCycle] = useState("monthly"); // Add state for billing cycle
 
-  // Handle button click and set the selected plan
+  // Retrieve from localStorage or set default state
+  const [selectedPlan, setSelectedPlan] = useState(
+    localStorage.getItem("selectedPlan") || null
+  );
+  const [billingCycle, setBillingCycle] = useState(
+    localStorage.getItem("billingCycle") || "monthly"
+  );
+
+  // Handle button click and set the selected plan, store in localStorage
   const handlePlanClick = (plan) => {
     setSelectedPlan(plan);
+    localStorage.setItem("selectedPlan", plan); // Save to localStorage
   };
 
-  // Handle toggle for billing cycle
+  // Handle toggle for billing cycle, store in localStorage
   const toggleBillingCycle = () => {
-    setBillingCycle(billingCycle === "monthly" ? "yearly" : "monthly");
+    const newBillingCycle = billingCycle === "monthly" ? "yearly" : "monthly";
+    setBillingCycle(newBillingCycle);
+    localStorage.setItem("billingCycle", newBillingCycle); // Save to localStorage
   };
 
   // Calculate the prices based on the billing cycle
@@ -27,21 +35,18 @@ const Step2 = () => {
     advanced: billingCycle === "monthly" ? "$12/month" : "$120/year",
     pro: billingCycle === "monthly" ? "$15/month" : "$150/year",
   };
-  const handleBack = () => {
-    navigate("/");
-  };
+ const handleBack = () => {
+   navigate("/");
+ };
   const handleNext = () => {
     navigate("/step3", {
-      state: {
-        selectedPlan,
-        billingCycle,
-      },
+      state: { billingCycle, selectedPlan },
     });
   };
 
   return (
     <>
-      <div className="md:w-1/2 w-11/12 mx-auto bg-white flex flex-col rounded-md md:py-6 py-5  px-8 relative md:top-0 bottom-14 md:mb-5 mb-20">
+      <div className="md:w-1/2 w-11/12 mx-auto bg-white flex flex-col rounded-md py-6 px-8 relative md:top-0 bottom-16 md:mb-5 mb-20 shadow-md">
         <h1 className="text-3xl font-bold mb-4 text-primary1">
           Select your Plan
         </h1>
@@ -49,13 +54,14 @@ const Step2 = () => {
           You have the option of monthly or yearly billing
         </p>
 
-        <main className="flex flex-col gap-2 md:flex-row justify-between py-4 md:py-2 ">
+        <main className="flex flex-col gap-2 md:flex-row justify-between py-4 ">
           {/* Arcade Plan */}
           <button
             onClick={() => handlePlanClick("arcade")}
-            value="Arcade"
-            className={`flex md:flex-col flex-row md:w-44 border p-4 md:items-baseline items-center rounded-lg ${
-              selectedPlan === "arcade" ? "border-blue-900" : "border-gray-300"
+            className={`flex md:flex-col flex-row md:w-44 border md:p-5 p-2 items-center md:items-start rounded-lg ${
+              selectedPlan === "arcade"
+                ? "border-blue-900 bg-cool"
+                : "border-gray-300"
             }`}
           >
             <img src={Arcade} alt="icon" className="w-10 h-10 mr-4 md:mb-14" />
@@ -71,10 +77,9 @@ const Step2 = () => {
           {/* Advanced Plan */}
           <button
             onClick={() => handlePlanClick("advanced")}
-            value="Advanced"
-            className={`flex md:flex-col flex-row md:w-44 border p-4 md:items-baseline items-center rounded-lg ${
+            className={`flex md:flex-col flex-row md:w-44 border md:p-5 p-2 items-center md:items-start rounded-lg ${
               selectedPlan === "advanced"
-                ? "border-blue-900"
+                ? "border-blue-900 bg-cool"
                 : "border-gray-300"
             }`}
           >
@@ -95,9 +100,10 @@ const Step2 = () => {
           {/* Pro Plan */}
           <button
             onClick={() => handlePlanClick("pro")}
-            value="Pro"
-            className={`flex flex-row md:flex-col md:w-44 border p-4 md:items-baseline items-center rounded-lg ${
-              selectedPlan === "pro" ? "border-blue-900" : "border-gray-300"
+            className={`flex flex-row md:flex-col md:w-44 border md:p-5 p-2 items-center md:items-start rounded-lg ${
+              selectedPlan === "pro"
+                ? "border-blue-900 bg-cool"
+                : "border-gray-300"
             }`}
           >
             <img src={Pro} alt="icon" className="w-10 h-10 mr-4 md:mb-14" />
@@ -116,7 +122,7 @@ const Step2 = () => {
           <h1
             className={`${
               billingCycle === "yearly"
-                ? "text-primary2"
+                ? "text-primary2 "
                 : "text-primary1 font-bold "
             }`}
           >
@@ -139,7 +145,10 @@ const Step2 = () => {
       </div>
       {/* Navigation Buttons */}
       <div className="flex justify-between items-center md:w-1/2 w-full my-2 mx-auto mb-0 md:relative fixed md:top-0 bottom-0 bg-white p-4 md:bg-transparent">
-        <button onClick={handleBack} className="text-primary1">
+        <button
+          onClick={handleBack}
+          className="text-primary2 hover:text-primary1"
+        >
           Go Back
         </button>
         <button

@@ -10,6 +10,8 @@ import Step1page from "./Pages/Step1page";
 import Step2page from "./Pages/Step2page";
 import Step3page from "./Pages/Step3page";
 import Step4page from "./Pages/Step4page";
+import Step5page from "./Pages/Step5page";
+import NotFoundPage from "./Pages/NotFoundPage";
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +27,8 @@ const App = () => {
         <Route formData={formData} path="/step2" element={<Step2page />} />
         <Route formData={formData} path="/step3" element={<Step3page />} />
         <Route formData={formData} path="/step4" element={<Step4page />} />
+        <Route formData={formData} path="/step5" element={<Step5page />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     )
   );
