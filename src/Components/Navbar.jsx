@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <div>
       {/* Desktop view */}
-      <nav className="hidden md:block bg-nav w-72 h-screen bg-cover fixed overflow-hidden p-10 ">
+      <nav className="hidden md:block bg-nav w-72 h-screen bg-cover fixed overflow-hidden p-10">
         <main className="flex flex-col items-start space-y-8">
           {/* Step 1 */}
           <div className="flex items-center gap-4">

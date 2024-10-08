@@ -107,7 +107,7 @@ const Step1 = () => {
           />
 
           {/* Phone Number Field */}
-          <div className="flex items-center gap-14 md:justify-between mx-10 mt-4 mb-2 ">
+          <div className="flex items-center md:gap-14 justify-between mx-10 mt-4 mb-2 ">
             <label htmlFor="phoneNumber" className=" text-primary1">
               Phone Number
             </label>
